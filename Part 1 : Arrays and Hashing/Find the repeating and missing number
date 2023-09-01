@@ -1,0 +1,26 @@
+vector<int> findMissingRepeatingNumbers(vector < int > &a) {
+    // Write your code here
+    vector<int>ans(2);
+    int n = a.size();
+
+    long long sum = 0;
+    long long sumOfSq = 0;
+
+    for(int num : a){
+        sum+=num;
+        sumOfSq+=(long long)num*num;
+    }
+    long long result = (long long)n*(n+1)/2;
+    long long resultOfSq = (long long)n*(n+1)*(2*n+1)/6;
+
+    long long diffOfSum = sum - result;
+    long long diffOfSq = sumOfSq - resultOfSq;
+
+    int missing = (int)((diffOfSq-diffOfSum*diffOfSum)/(2*diffOfSum));
+    int repeating = (int)(missing + diffOfSum);
+
+    ans[0]=repeating;
+    ans[1]=missing;
+
+    return ans;
+}
